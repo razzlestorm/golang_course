@@ -1,13 +1,16 @@
 package main
 
-import "fmt"
+// Notes:
+// Array in Go is fixed length
+// Slice can grow/shrink in size
+// Both must be defined by a data type
 
 func main() {
-	card := newCard()
-	fmt.Println(card)
+	// deck defined in deck.go
+	cards := newDeck()
+	// append not modifying the original object is an important point in Go
+
+	cards.print()
 }
 
 // Write datatype being returned just after arguments parens
-func newCard() string {
-	return "Five of Diamonds"
-}
