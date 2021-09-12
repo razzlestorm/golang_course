@@ -10,7 +10,7 @@ func main() {
 	cards := newDeck()
 	// append not modifying the original object is an important point in Go
 
-	cards.print()
+	cards.saveToFile("my_cards")
 }
 
 // Write datatype being returned just after arguments parens
