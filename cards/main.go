@@ -7,10 +7,12 @@ package main
 
 func main() {
 	// deck defined in deck.go
-	cards := newDeck()
-	// append not modifying the original object is an important point in Go
 
-	cards.saveToFile("my_cards")
+	cards := newDeckFromFile("my_cards")
+	// append not modifying the original object is an important point in Go
+	cards.shuffle()
+	cards.print()
+	//cards.saveToFile("my_cards")
 }
 
 // Write datatype being returned just after arguments parens
