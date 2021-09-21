@@ -25,6 +25,7 @@ func main() {
 
 func printMap(c map[string]string) {
 	for color, hex := range c {
+		// No spaces needed!
 		fmt.Println("Hex code for", color, "is", hex)
 	}
 }
