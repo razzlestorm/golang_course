@@ -1,21 +1,32 @@
 package main
 
 import (
-	"io"
-	"os"
+	"fmt"
+	"net/http"
 )
 
-// file to open should be provided as an argument using os.Args, which is a []string
-
 func main() {
-	fp := os.Args[1]
-	f, err := os.Open(fp)
-	if err != nil {
-		os.Exit(1)
+	links := []string{
+		"http://127.0.0.1",
+		"http://google.com",
+		"http://stackoverflow.com",
+		"http://golang.org",
+		"http://amazon.com",
 	}
-	//b1 := make([]byte, 99999)
-	//n1, _ := f.Read(b1)
-	//fmt.Printf("%d bytes:\n%s", n1, string(b1[:n1]))
-	// Alternatively:
-	io.Copy(os.Stdout, f)
+
+	for ii, link := range links {
+		fmt.Println(ii)
+		checkLink(link)
+	}
+}
+
+func checkLink(link string) {
+	_, err := http.Get(link)
+	if err != nil {
+		fmt.Println(link, "might be down!")
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(link, "is up!")
 }

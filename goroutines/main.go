@@ -12,6 +12,7 @@ func main() {
 		"http://stackoverflow.com",
 		"http://golang.org",
 		"http://amazon.com",
+		"http://facebook.com",
 	}
 
 	c := make(chan string)
@@ -22,24 +23,22 @@ func main() {
 
 	// you can use range with channel to await a value sent from channel
 	for l := range c {
-		go func() {
+		go func(link string) {
 			time.Sleep(5 * time.Second)
-			checkLink(l, c)
-		}()
-
+			checkLink(link, c)
+		}(l)
 	}
-
 }
 
 // need to declare the type of data to be passed to channel here, as well
 func checkLink(link string, c chan string) {
 	_, err := http.Get(link)
 	if err != nil {
-		fmt.Println(link, "might be down!")
+		fmt.Println(err)
 		c <- link
 		return
 	}
 
 	fmt.Println(link, "is up!")
-	c <- "Yep its up"
+	c <- link
 }
